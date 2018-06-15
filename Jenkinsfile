@@ -1,9 +1,14 @@
-/*
 node{
 
 stage('Build'){
-echo "deleting dir"
-deleteDir() 
+
+checkout([$class: 'GitSCM', 				
+					branches: [[name: "origin/master"]], 
+					userRemoteConfigs: [[
+					url: 'https://github.com/pipelineascode/node-when-changelog.git']]
+					])
+
+
 def changeLogSets = currentBuild.changeSets
 println  "changeLogSets.size(): ${changeLogSets.size()}"
 for (int i = 0; i < changeLogSets.size(); i++) {
@@ -20,21 +25,4 @@ for (int i = 0; i < changeLogSets.size(); i++) {
 }
 }
 }
-*/
 
-pipeline {
-    agent any
-	
-    stages {
-        stage('Build') {
-		
-			when{
-				changelog '.*initial.*'
-			}
-		
-            steps {                
-                echo 'Hello World changelog'
-            }
-        }
-    }
-}
