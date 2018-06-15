@@ -1,0 +1,30 @@
+node{
+
+stage('Build'){
+
+checkout([$class: 'GitSCM', 				
+					branches: [[name: "origin/master"]], 
+					userRemoteConfigs: [[
+					url: 'https://github.com/pipelineascode/node-when-changelog.git']]
+					])
+
+
+def changeLogSets = currentBuild.changeSets
+println  "changeLogSets.size(): ${changeLogSets.size()}"
+for (int i = 0; i < changeLogSets.size(); i++) {
+    def entries = changeLogSets[i].items
+    for (int j = 0; j < entries.length; j++) {
+        def entry = entries[j]
+		echo "${entry.getClass().getName()}"
+        echo "${entry.commitId} by ${entry.author} on ${new Date(entry.timestamp)}: ${entry.msg}"
+		echo "${entry.msg}"
+        def files = new ArrayList(entry.affectedFiles)
+        for (int k = 0; k < files.size(); k++) {
+            def file = files[k]
+            echo "  ${file.editType.name} ${file.path}"
+        }
+    }
+}
+}
+}
+
