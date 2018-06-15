@@ -1,6 +1,7 @@
 node{
 
 stage('Build'){
+deleteDir() 
 def changeLogSets = currentBuild.changeSets
 println  "changeLogSets.size(): ${changeLogSets.size()}"
 for (int i = 0; i < changeLogSets.size(); i++) {
@@ -16,7 +17,7 @@ for (int i = 0; i < changeLogSets.size(); i++) {
     }
 }
 
-deleteDir() 
+
 }
 
 /*
