@@ -1,5 +1,5 @@
 node{
-/*
+
 def changeLogSets = currentBuild.changeSets
 println  "changeLogSets.size(): ${changeLogSets.size()}"
 for (int i = 0; i < changeLogSets.size(); i++) {
@@ -14,7 +14,7 @@ for (int i = 0; i < changeLogSets.size(); i++) {
         }
     }
 }
-*/
+/*
 def changeLogSets = currentBuild.rawBuild.changeSets
 for (int i = 0; i < changeLogSets.size(); i++) {
     def entries = changeLogSets[i].items
@@ -28,6 +28,6 @@ for (int i = 0; i < changeLogSets.size(); i++) {
         }
     }
 }
-
+*/
 
 }
