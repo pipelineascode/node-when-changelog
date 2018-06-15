@@ -1,7 +1,7 @@
 node{
 
 stage('Build'){
-echoing "deleting dir"
+echo "deleting dir"
 deleteDir() 
 def changeLogSets = currentBuild.changeSets
 println  "changeLogSets.size(): ${changeLogSets.size()}"
